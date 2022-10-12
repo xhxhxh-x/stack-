@@ -1,0 +1,72 @@
+#include<iostream>
+#define maxsize 20
+using namespace std;
+int x1;
+int n, m,e,ch;
+struct stack {
+	int top;
+	int data[maxsize];
+};
+void creat(stack& a) {
+	a.top = -1;
+}
+void insert(stack& a, int x2) {
+	if (a.top == maxsize - 1) {
+		cout << "栈满" << endl;
+
+	}
+	a.data[++a.top] = x2;
+
+}
+void print(stack& a) {
+	int b = 0;
+	while (b != a.top + 1) {
+		cout << a.data[b++]<<endl;
+	}
+}
+void pop(stack& a) {
+	
+	if (a.top == -1) {
+		cout << "栈中无数据元素" << endl;
+		
+	}
+	else { 
+		cout << "栈顶元素为:" << a.data[a.top--] << endl;
+	
+	} 
+}
+void menu() {
+	
+	cout << "输入1然后输入元素e，将数据元素e入栈，并输出入栈后的顺序栈中各元素值。" << endl;
+	cout << "输入2将顺序栈中的栈顶元素出栈，并输出出栈元素的值和出栈后顺序栈中各元素值" << endl;
+	cout << "输入3打印栈中元素" << endl;
+	cout << "输入0退出系统" << endl;
+	
+}
+int main() {
+
+	cout << "请首先依次输入栈中数据元素个数，并把数据元素依次输入进去" << endl;
+	struct stack s;
+	creat(s);
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		cin >> m;
+		insert(s, m);
+	}
+	while (1) {
+		menu();
+		cin >> ch;
+		switch (ch) {
+		case 1:cin >> e;
+			insert(s, e);
+			
+			print(s); break;
+		case 2:pop(s); break;
+		case 3:cout << "栈中元素为：" << endl; print(s); break;
+		case 0:exit(0);
+		default:cout << "输入的数字有误" << endl;
+		}
+	}
+	
+}
+
