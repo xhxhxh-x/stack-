@@ -1,0 +1,72 @@
+
+#include<iostream>
+#define maxsize 5
+int m, n,ch,e;
+using namespace std;
+struct deque {
+	int front;
+	int rear;
+	int data[maxsize];
+};
+void creat(deque& a) {
+	a.front = a.rear=0;
+}
+void insert(deque& a, int x) {
+	if ((a.rear + 1) % maxsize ==a.front) {
+		cout << "队列已满" << endl;
+		return;
+	}
+	a.data[a.rear % maxsize] = x;
+	a.rear=(a.rear+1)%maxsize;
+	
+	
+}
+void pop(deque &a) {
+	if (a.rear== a.front % maxsize) {
+		cout << "队列已空" << endl;
+	}else {
+		cout <<a.data[a.front] << endl; 
+		a.front=(a.front+1)%maxsize;
+	}
+	
+}
+void print(deque &a) {
+	int x = a.front;
+	for (int i = a.front; i <a.rear; i++) {
+		cout << a.data[i]<<endl;
+	}
+}
+void menu() {
+
+	cout << "输入1然后输入元素e，将数据元素e入队，并输出入队后的顺序队中各元素值。" << endl;
+	cout << "输入2将顺序栈中的队首元素出队，并输出出队元素的值和出队后顺序队中各元素值" << endl;
+	cout << "输入3打印队中元素" << endl;
+	cout << "输入0退出系统" << endl;
+
+}
+int main() {
+	cout << "请首先依次输入队中数据元素个数，并把数据元素依次输入进去" << endl;
+	cin >> n;
+	deque l;
+	for (int i = 0; i < n-1; i++) {
+		cin >> m;
+
+		insert(l, m);
+	}
+	while (1) {
+		menu();
+		cin >> ch;
+		switch (ch) {
+		case 1:cin >> e;
+			insert(l, e);
+
+			print(l); break;
+		case 2:pop(l); break;
+		case 3:cout << "队中元素为：" << endl; print(l); break;
+		case 0:exit(0);
+		default:cout << "输入的数字有误" << endl;
+		}
+	}
+
+}
+ //不知道为什么，dev上能正常运行，visual studio上就会报错，而且打印出来的是地址
