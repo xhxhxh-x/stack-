@@ -1,0 +1,41 @@
+#include<iostream>
+using namespace std;
+struct stack {
+	int data;
+	struct stack* next;
+};
+stack *creat() {
+	struct stack* l = new stack;
+	l->next = NULL;
+	return l;
+}
+void insertStack(stack *l, int x) {
+	struct stack* temp = new stack;
+	temp->data = x;
+	temp->next =l->next;
+	l->next = temp;
+}
+void pop(stack *l) {
+	if (l->next == NULL) {
+		cout << "栈中元素已空" << endl;
+		return;
+	}
+	cout << "出栈元素为：" << l->next->data << endl;
+	l->next = l->next->next;
+}
+int main(){
+	cout<<"学号：211040100421"<<endl;
+	cout<<"姓名：徐赫良"<<endl; 
+	cout<<"请输入入栈个数，再依次输入入栈的元素"<<endl;
+	int  n,m;
+	struct stack *s=new stack;
+	s=creat(); 
+	cin>>n;
+	for(int i=0;i<n;i++){
+		cin>>m;
+		insertStack(s,m);//入栈 
+	}
+	for(int i=0;i<n;i++){
+		pop(s);
+	}
+}
