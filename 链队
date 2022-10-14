@@ -1,0 +1,65 @@
+#include<iostream>
+using namespace std;
+int n, m;
+typedef struct dNode {
+	int data;
+	dNode* next;
+}dNode, * dPtr;
+typedef struct {
+	dPtr front;
+	dPtr rear;
+}linkDeque;
+void creatPtr(linkDeque& a) {
+	a.front = a.rear = new dNode;
+	a.front->next = NULL;
+}
+//入队
+void insert(linkDeque& b, int a) {
+	dNode* temp = new dNode;
+	temp->data = a;
+	temp->next = NULL;
+	b.rear->next = temp;
+	b.rear = temp;
+}
+//遍历
+void print(linkDeque& b) {
+	dPtr temp = new dNode;
+	temp = b.front->next;
+	cout << "遍历后的元素为：" << endl;
+	while (temp) {
+		cout << temp->data << endl;
+		temp = temp->next;
+	}
+
+}
+//出队
+void pop(linkDeque& b) {
+	dPtr temp = new dNode;
+	temp = b.front->next;
+	cout << "出队元素为：" << temp->data << endl;
+	b.front = b.front->next;
+}
+//判空
+void Empty(linkDeque& b) {
+	if (b.front->next == NULL) {
+		cout << "队列为空" << endl;
+	}
+	else cout << "队列不为空" << endl;
+}
+int main() {
+	linkDeque d;
+	creatPtr(d);
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		cin >> m;
+		insert(d, m);
+	}
+	print(d);
+	pop(d);
+	Empty(d);
+	pop(d);
+	Empty(d);
+	pop(d);
+	Empty(d);
+
+}
